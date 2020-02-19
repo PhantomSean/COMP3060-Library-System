@@ -21,11 +21,29 @@ a:link {
 .login-signup-form {
     background-color: #e3e3e3;
 }
+.browse-jumbotron {
+    height: 350px;
+    border-radius: 0%;
+    background-image: 
+    linear-gradient(
+      rgba(0, 0, 0, 0.2),
+      rgba(0, 0, 0, 0.2)
+    ), url(https://www.keiseruniversity.edu/wp-content/uploads/2019/08/Books.jpg);
+    background-size: 100% 100%;
+    color: white;
+}
+.row .card {
+    color: white;
+}
+.card-img-top {
+    height: 200px;
+}
 #index-hr {
     border-color: white;
 }
 #slogan {
     font-size: 25px;
 }
+
 
 
