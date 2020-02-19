@@ -18,14 +18,14 @@ a:link {
     background-size: cover;
     color: white;
 }
+.login-signup-form {
+    background-color: #e3e3e3;
+}
 #index-hr {
     border-color: white;
 }
 #slogan {
     font-size: 25px;
-}
-#login-form {
-    background-color: #e3e3e3;
 }
 
 

@@ -38,20 +38,37 @@
 
     <!-- Login form -->
     <div class="container mt-5">
-        <h1 class="display-4 mb-3">Member Login</h1>
-        <form id="login-form" action="" method="" class="p-3 rounded">
-            <div class="form-group">
-                <label for="email">Email Address</label>
-                <input type="email" class="form-control" id="email" placeholder="name@example.com" required>
-              </div>
-            <div class="form-group">
-                <label for="pswd">Password</label>
-                <input type="password" class="form-control" id="pswd" placeholder="Password" required>
+        <div class="row">
+            <div class="col-md-6">
+                <h1 class="h1 mb-3 font-weight-normal">Member Login</h1>
+                <form action="" method="post" class="p-3 rounded login-signup-form">
+                    <div class="form-group">
+                        <label for="login-email">Email Address</label>
+                        <input type="email" class="form-control" id="login-email" placeholder="name@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="login-pswd">Password</label>
+                        <input type="password" class="form-control" id="login-pswd" placeholder="Password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </form>
             </div>
-            <button type="submit" class="btn btn-primary">Login</button>
-        </form>
-        <p class="lead mt-3 mb-0">Not registered? <a href="#">Sign up</a></p> 
-        <p class="lead">For librarian login please see <a href="#">here</a></p> 
+            <div class="col-md-6">
+                <h1 class="h1 mb-3 font-weight-normal">Librarian Login</h1>
+                <form action="" method="post" class="p-3 rounded login-signup-form">
+                    <div class="form-group">
+                        <label for="signup-email">Email Address</label>
+                        <input type="email" class="form-control" id="signup-email" placeholder="name@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-pswd">Password</label>
+                        <input type="password" class="form-control" id="signup-pswd" placeholder="Password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </form>
+            </div>
+        </div>
+        <p class="lead mt-3 mb-0">Not registered? <a href="#">Sign up</a></p>
     </div>
 
     <!-- Future footer containing things like email, copright etc.  -->
