@@ -1,4 +1,4 @@
-package ie.mcwebdeveloper.project.model;
+package ie.mcwebdeveloper.project.models;
 
 import javax.persistence.Entity;
 import javax.persistence.GenerationValue;

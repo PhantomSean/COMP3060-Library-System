@@ -1,4 +1,4 @@
-package ie.mcwebdeveloper.project.model;
+package ie.mcwebdeveloper.project.models;
 
 import javax.persistence.Entity;
 import javax.persistence.GenerationValue;
@@ -7,20 +7,20 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="Librarians")
-public class Librarian {
+@Table(name="Libraries")
+public class Library {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
 
     private long id;
     private String name;
-    private long library_id;
+    private String location;
 
-    protected Librarian() {};
+    protected Library() {};
 
-    public Librarian(String name, long library_id) {
+    public Library(String name, String location) {
         this.name = name;
-        this.library_id = library_id;
+        this.location = location;
     }
 
     // Getter and Setter for Id
@@ -37,11 +37,11 @@ public class Librarian {
     public void setName(String name) {
         this.name = name;
     }
-    // Getter and Setter for Library Id
-    public long getLocation() {
-        return library_id;
+    // Getter and Setter for Location
+    public String getLocation() {
+        return location;
     }
-    public void setLocation(long library_id) {
-        this.library_id = library_id;
+    public void setLocation(String location) {
+        this.location = location;
     }
 }
