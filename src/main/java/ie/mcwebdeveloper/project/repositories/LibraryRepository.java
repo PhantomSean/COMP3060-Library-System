@@ -7,5 +7,5 @@ import ie.mcwebdeveloper.project.models.Library;
 
 @Repository
 public interface LibraryRepository extends JpaRepository<Library, Long> {
-    
+    Library findById(long id);
 }

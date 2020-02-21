@@ -7,5 +7,5 @@ import ie.mcwebdeveloper.project.models.Member;
 
 @Repository
 public interface MemberRepository extends JpaRepository<Member, Long> {
-    
+    Member findById(long id);
 }
