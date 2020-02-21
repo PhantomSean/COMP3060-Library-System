@@ -37,7 +37,7 @@ public class Member {
     }
     // Getter and Setter for Surname
     public String getSurname() {
-        return first_name;
+        return surname;
     }
     public void setSurame(String surname) {
         this.surname = surname;
