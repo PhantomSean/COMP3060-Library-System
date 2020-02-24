@@ -9,7 +9,7 @@ public class Librarian {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private long id;
     private String name;
-    private long library_id;
+    private long library_id; // Foreign key referencing what library they are employed by
 
     protected Librarian() {};
 

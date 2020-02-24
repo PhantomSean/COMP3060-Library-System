@@ -7,8 +7,7 @@ import javax.persistence.*;
 public class Catalogue {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-
-    private long library_id;
+    private long library_id; // References what library the catalogue belongs to
 
     protected Catalogue() {};
 
