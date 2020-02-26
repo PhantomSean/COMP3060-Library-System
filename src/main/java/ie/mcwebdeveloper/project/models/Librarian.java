@@ -10,15 +10,18 @@ public class Librarian {
     private long id;
     private String name;
 
-    @ManyToOne
-    @JoinColumn(name = "library_id")
-    private Library library; // Foreign key referencing what library they are employed by
+    private String password;
+
+//    @ManyToOne
+//    @JoinColumn(name = "library_id")
+//    private Library library; // Foreign key referencing what library they are employed by
 
     protected Librarian() {};
 
-    public Librarian(String name, Library library) {
+    public Librarian(String name, String password/*, Library library*/) {
         this.name = name;
-        this.library = library;
+        this.password = password;
+//        this.library = library;
     }
 
     // Getter and Setter for Id
@@ -35,11 +38,17 @@ public class Librarian {
     public void setName(String name) {
         this.name = name;
     }
+    public String getPassword() {
+        return password;
+    }
+    public void setPassword(String password) {
+        this.password = password;
+    }
     // Getter and Setter for Library Id
-    public Library getLibrary() {
-        return library;
-    }
-    public void setLibrary(Library library) {
-        this.library = library;
-    }
+//    public Library getLibrary() {
+//        return library;
+//    }
+//    public void setLibrary(Library library) {
+//        this.library = library;
+//    }
 }

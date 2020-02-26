@@ -9,9 +9,9 @@ public class Book {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private long id;
 
-    @ManyToOne
-    @JoinColumn(name="library_id")
-    private Library library; // Foreign key referencing what library the book belongs to
+//    @ManyToOne
+//    @JoinColumn(name="library_id")
+//    private Library library; // Foreign key referencing what library the book belongs to
 
     private String title;
     private String author;
@@ -34,12 +34,12 @@ public class Book {
         this.id = id;
     }
 
-    public Library getLibrary() {
-        return library;
-    }
-    public void setLibrary(Library library) {
-        this.library = library;
-    }
+//    public Library getLibrary() {
+//        return library;
+//    }
+//    public void setLibrary(Library library) {
+//        this.library = library;
+//    }
 
     public String getTitle() {
         return title;

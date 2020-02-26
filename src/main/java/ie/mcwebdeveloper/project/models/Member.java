@@ -12,13 +12,15 @@ public class Member {
     private String first_name;
     private String surname;
     private String email;
+    private String password;
 
     protected Member() {};
 
-    public Member(String first_name, String surname, String email) {
+    public Member(String first_name, String surname, String email, String password) {
         this.first_name = first_name;
         this.surname = surname;
         this.email = email;
+        this.password = password;
     }
 
     // Getter and Setter for Id
@@ -48,5 +50,11 @@ public class Member {
     }
     public void setName(String email) {
         this.email = email;
+    }
+    public String getPassword() {
+        return password;
+    }
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

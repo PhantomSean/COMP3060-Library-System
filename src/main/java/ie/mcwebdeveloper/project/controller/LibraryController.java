@@ -12,10 +12,10 @@ public class LibraryController {
         return "index.html";
     }
     // Browse
-    @GetMapping("/browse")
-    public String getBrowse() {
-        return "browse.html";
-    }
+//    @GetMapping("/browse")
+//    public String getBrowse() {
+//        return "browse.html";
+//    }
     // View Library (Show)
 //    @GetMapping("/browse/{id}")
 //    public String showLibrary() {
@@ -30,6 +30,10 @@ public class LibraryController {
     @GetMapping("/signup")
     public String getSignup() {
         return "signup.html";
+    }
+    @GetMapping("/search")
+    public String getSearch() {
+        return "search.html";
     }
 
 }
