@@ -1,6 +1,7 @@
 package ie.mcwebdeveloper.project.models;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name="Libraries")
@@ -8,13 +9,18 @@ public class Library {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private long id;
-    private String name;
+    private String l_name;
     private String location;
+
+    @OneToMany(mappedBy = "Library", cascade = CascadeType.ALL)
+    private Set<Book> books;
+    @OneToMany(mappedBy = "Library", cascade = CascadeType.ALL)
+    private Set<Librarian> librarians;
 
     protected Library() {};
 
     public Library(String name, String location) {
-        this.name = name;
+        this.l_name = name;
         this.location = location;
     }
 
@@ -27,10 +33,10 @@ public class Library {
     }
     // Getter and Setter for Name
     public String getName() {
-        return name;
+        return l_name;
     }
     public void setName(String name) {
-        this.name = name;
+        this.l_name = name;
     }
     // Getter and Setter for Location
     public String getLocation() {

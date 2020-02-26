@@ -9,13 +9,16 @@ public class Librarian {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private long id;
     private String name;
-    private long library_id; // Foreign key referencing what library they are employed by
+
+    @ManyToOne
+    @JoinColumn(name = "library_id")
+    private Library library; // Foreign key referencing what library they are employed by
 
     protected Librarian() {};
 
-    public Librarian(String name, long library_id) {
+    public Librarian(String name, Library library) {
         this.name = name;
-        this.library_id = library_id;
+        this.library = library;
     }
 
     // Getter and Setter for Id
@@ -33,10 +36,10 @@ public class Librarian {
         this.name = name;
     }
     // Getter and Setter for Library Id
-    public long getLocation() {
-        return library_id;
+    public Library getLibrary() {
+        return library;
     }
-    public void setLocation(long library_id) {
-        this.library_id = library_id;
+    public void setLibrary(Library library) {
+        this.library = library;
     }
 }

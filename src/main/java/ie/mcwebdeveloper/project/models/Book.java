@@ -8,23 +8,24 @@ public class Book {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private long id;
-    private long library_id; // Foreign key referencing what library the book belongs to
+
+    @ManyToOne
+    @JoinColumn(name="library_id")
+    private Library library; // Foreign key referencing what library the book belongs to
+
     private String title;
     private String author;
     private boolean available;
     private boolean reserved;
 
-
     protected Book() {};
 
-    public Book(long id, String title, String author, boolean available, boolean reserved) {
-        this.id = id;
+    public Book(String title, String author, boolean available, boolean reserved) {
         this.title = title;
         this.author = author;
         this.available = available;
         this.reserved = reserved;
     }
-
 
     public long getId() {
         return id;
@@ -33,11 +34,11 @@ public class Book {
         this.id = id;
     }
 
-    public long getLibraryId() {
-        return library_id;
+    public Library getLibrary() {
+        return library;
     }
-    public void setLibraryId(long id) {
-        this.library_id = id;
+    public void setLibrary(Library library) {
+        this.library = library;
     }
 
     public String getTitle() {
