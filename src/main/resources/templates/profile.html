@@ -45,18 +45,24 @@
                 <div class="form-group">
                     <label for="profile-email">Email Address</label>
                     <input type="email" class="form-control" id="profile-email" th:text="${member.email}" required>
+                </div>
                 <div class="form-group">
                     <label for="profile-first_name">First Name</label>
-                    <input type="email" class="form-control" id="profile-first_name" th:text="${member.first_name}" required>
+                    <input type="text" class="form-control" id="profile-first_name" th:text="${member.first_name}" required>
+                </div>
                 <div class="form-group">
                     <label for="profile-surname">Surname</label>
-                    <input type="email" class="form-control" id="profile-surname" th:text="${member.surname}" required>
-                </div><button type="submit" class="btn btn-primary">Submit</button>
-
+                    <input type="text" class="form-control" id="profile-surname" th:text="${member.surname}" required>
+                </div>
+                <div class="form-group">
+                    <label for="profile-password">Password</label>
+                    <input type="password" class="form-control" id="profile-password" th:text="${member.password}" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
             </form>
-
-            <p class="lead mt-3 mb-0"><a href="/signup">Change Password</a></p>
         </div>
+    </div>
+</div>
         <br>
 
         <!-- Future footer containing things like email, copright etc.  -->
