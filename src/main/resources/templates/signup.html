@@ -38,60 +38,40 @@
 
     <!-- Signup form -->
     <div class="container mt-5">
-        <div class="row">
-            <div class="col-md-6">
-                <h1 class="h1 mb-3 font-weight-normal">Member Sign Up</h1>
-                <form action="" method="post" class="p-3 rounded login-signup-form">
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="f-name">First Name</label>
-                            <input type="text" class="form-control" id="f-name" placeholder="First name" required>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="l-name">Last Name</label>
-                            <input type="text" class="form-control" id="l-name" placeholder="Last name" required>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="email">Email address</label>
-                            <input type="email" class="form-control" id="email" placeholder="name@example.com" required>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="pswd">Password</label>
-                            <input type="password" pattern=".{8,}" class="form-control" id="pswd" placeholder="Password" autofocus required title="Please enter at least 8 characters">
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Login</button>
-                </form>
+        <h1 class="h1 mb-3 font-weight-normal">Member Sign Up</h1>
+        <form action="/signup" method="post" class="p-3 rounded login-signup-form">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="firstname">First Name</label>
+                    <input type="text" class="form-control" name="firstname" id="firstname" placeholder="First name" required>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="lastname">Last Name</label>
+                    <input type="text" class="form-control" name="lastname" id="lastname" placeholder="Last name" required>
+                </div>
             </div>
-            <div class="col-md-6">
-                <h1 class="h1 mb-3 font-weight-normal">Librarian Sign Up</h1>
-                <form action="" method="post" class="p-3 rounded login-signup-form">
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="f-name">First Name</label>
-                            <input type="text" class="form-control" id="f-name" placeholder="First name" required>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="l-name">Last Name</label>
-                            <input type="text" class="form-control" id="l-name" placeholder="Last name" required>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="email">Email address</label>
-                            <input type="email" class="form-control" id="email" placeholder="name@example.com" required>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="pswd">Password</label>
-                            <input type="password" pattern=".{8,}" class="form-control" id="pswd" placeholder="Password" autofocus required title="Please enter at least 8 characters">
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Login</button>
-                </form>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="email">Email address</label>
+                    <input type="email" class="form-control" name="email" id="email" placeholder="name@example.com" required>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="password">Password</label>
+                    <input type="password" pattern=".{8,}" class="form-control" name="password" id="password" placeholder="Password" autofocus required title="Please enter at least 8 characters">
+                </div>
             </div>
-        </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="username">Username</label>
+                    <input type="text" class="form-control" name="username" id="username" placeholder="First name" required>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="librarian">Librarian?</label>
+                    <input type="text" class="form-control" name="librarian" id="librarian" placeholder="TRUE if librarian, FALSE otherwise" required>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Signup</button>
+        </form>
         <p class="lead mt-3 mb-0">Already a member? <a href="/login">Login</a></p>
     </div>
 

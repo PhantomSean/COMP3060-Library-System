@@ -9,14 +9,11 @@ public class Book {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private long id;
 
-//    @ManyToOne
-//    @JoinColumn(name="library_id")
-//    private Library library; // Foreign key referencing what library the book belongs to
-
     private String title;
     private String author;
     private boolean available;
     private boolean reserved;
+    private long userID;
 
     protected Book() {};
 
