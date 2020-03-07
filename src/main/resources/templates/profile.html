@@ -36,7 +36,7 @@
     </div>
 </nav>
 
-<!!-- Profile page -->
+<!-- Profile page -->
 <div class="container mt-5">
     <div class="row">
         <div class="col-md-6">
@@ -44,19 +44,23 @@
             <form action="" method="post" class="p-3 rounded login-signup-form">
                 <div class="form-group">
                     <label for="profile-email">Email Address</label>
-                    <input type="email" class="form-control" id="profile-email" th:text="${member.email}" required>
+                    <input type="email" class="form-control" id="profile-email" th:text="${currUser.email}" required>
+                </div>
+                <div class="form-group ">
+                    <label for="profile-username">Username</label>
+                    <input type="text" class="form-control" id="profile-username" th:text="${currUser.username}" required>
                 </div>
                 <div class="form-group">
                     <label for="profile-first_name">First Name</label>
-                    <input type="text" class="form-control" id="profile-first_name" th:text="${member.first_name}" required>
+                    <input type="text" class="form-control" id="profile-first_name" th:text="${currUser.first_name}" required>
                 </div>
                 <div class="form-group">
                     <label for="profile-surname">Surname</label>
-                    <input type="text" class="form-control" id="profile-surname" th:text="${member.surname}" required>
+                    <input type="text" class="form-control" id="profile-surname" th:text="${currUser.surname}" required>
                 </div>
                 <div class="form-group">
                     <label for="profile-password">Password</label>
-                    <input type="password" class="form-control" id="profile-password" th:text="${member.password}" required>
+                    <input type="password" class="form-control" id="profile-password" th:text="${currUser.password}" required>
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>

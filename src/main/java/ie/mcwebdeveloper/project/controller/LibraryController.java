@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
@@ -39,10 +40,12 @@ public class LibraryController {
     public String getSignup() {
         return "signup.html";
     }
+    // search
     @GetMapping("/search")
     public String getSearch() {
         return "search.html";
     }
+
     @GetMapping("/profile/{id}")
     public String profile(@PathVariable String id, Model model){
         long i = Long.parseLong(id);
