@@ -102,4 +102,7 @@ public class LibraryController {
         model.addAttribute("currUser", user);
         return "profile.html";
     }
+
+    
+
 }
