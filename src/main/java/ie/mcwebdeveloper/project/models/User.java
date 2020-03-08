@@ -14,17 +14,17 @@ public class User {
     private String lastname;
     private String email;
     private String password;
-    private String librarian;
+    private String role;
 
     public User () {}
 
-    public User(String username, String firstname, String lastname, String email, String password, String librarian) {
+    public User(String username, String firstname, String lastname, String email, String password, String role) {
         this.username = username;
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;
         this.password = password;
-        this.librarian = librarian;
+        this.role = role;
     }
 
     public long getId() {
@@ -69,10 +69,10 @@ public class User {
         this.password = password;
     }
 
-    public String getLibrarian() {
-        return librarian;
+    public String getRole() {
+        return role;
     }
-    public void setLibrarian(String librarian) {
-        this.librarian = librarian;
+    public void setRole(String role) {
+        this.role = role;
     }
 }
