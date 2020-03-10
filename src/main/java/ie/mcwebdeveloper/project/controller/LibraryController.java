@@ -1,7 +1,9 @@
 package ie.mcwebdeveloper.project.controller;
 
 import ie.mcwebdeveloper.project.UserSession;
+import ie.mcwebdeveloper.project.models.Book;
 import ie.mcwebdeveloper.project.models.User;
+import ie.mcwebdeveloper.project.repositories.BookRepository;
 import ie.mcwebdeveloper.project.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletResponse;
 import java.util.Optional;
@@ -21,6 +24,9 @@ public class LibraryController {
 
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    BookRepository bookRepository;
 
     @GetMapping("/")
     public String getLanding(Model model) {
@@ -73,25 +79,28 @@ public class LibraryController {
         return "redirect:";
     }
 
-    @GetMapping("/search")
-    public String getSearch() {
-        return "search.html";
-    }
+   @GetMapping("/browse")
+   public String browse(Model model) {
+       model.addAttribute("books", bookRepository.findAll());
+       return "browse.html";
+   }
 
-    //    @PostMapping("/")
-//    public String loginMember() {
-//        return "/";
-//    }
-    // Browse
-//    @GetMapping("/browse")
-//    public String getBrowse() {
-//        return "browse.html";
-//    }
-    // View Library (Show)
-//    @GetMapping("/browse/{id}")
-//    public String showLibrary() {
-//        return "browse.html";
-//    }
+   @GetMapping("/admin/manage")
+   public String searchmembers(Model model, @RequestParam(defaultValue = "") String username) {
+       model.addAttribute("users", userRepository.findByUsernameLike("%"+ username +"%"));
+       return "searchmembers.html";
+   }
+
+   @PostMapping("/admin/addbook")
+   public String addBook(Book book) {
+       bookRepository.save(book);
+       return "searchmembers.html";
+   }
+
+   @GetMapping("/admin/addbook")
+   public String getAddBook() {
+       return "addbook.html";
+   }
 
     @GetMapping("/user/profile/{id}")
     public String getProfile(@PathVariable String id, Model model){

@@ -3,7 +3,7 @@ package ie.mcwebdeveloper.project.models;
 import javax.persistence.*;
 
 @Entity
-@Table(name="Books")
+@Table(name="book")
 public class Book {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
@@ -13,7 +13,7 @@ public class Book {
     private String author;
     private boolean available;
     private boolean reserved;
-    private long userID;
+    // private long userID;
 
     protected Book() {};
 
