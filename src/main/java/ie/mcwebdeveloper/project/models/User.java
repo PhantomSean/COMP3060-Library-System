@@ -7,24 +7,24 @@ import javax.persistence.*;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String username;
     private String firstname;
     private String lastname;
     private String email;
     private String password;
-    private String role;
+    private boolean librarian;
 
     public User () {}
 
-    public User(String username, String firstname, String lastname, String email, String password, String role) {
+    public User(String username, String firstname, String lastname, String email, String password, boolean librarian) {
         this.username = username;
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;
         this.password = password;
-        this.role = role;
+        this.librarian = librarian;
     }
 
     public long getId() {
@@ -69,10 +69,17 @@ public class User {
         this.password = password;
     }
 
-    public String getRole() {
-        return role;
+    public boolean isLibrarian() {
+        return librarian;
     }
-    public void setRole(String role) {
-        this.role = role;
+    public void setLibrarian(boolean librarian) {
+        this.librarian = librarian;
     }
+
+//    public String getRole() {
+//        return role;
+//    }
+//    public void setRole(String role) {
+//        this.role = role;
+//    }
 }

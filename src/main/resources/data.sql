@@ -1,4 +1,4 @@
-INSERT INTO user(id,username,firstname,lastname,email,password,role)
+INSERT INTO user(id,username,firstname,lastname,email,password,librarian)
 VALUES
-(1,'adminUser','Bilbo','Swaggins','bigbilbo@theshire.com','password','admin'),
-(2,'normalUser','Average','McMediocre','beanzmeanzheinz@idontknow.com','password2','user');
+(0,'adminUser','Bilbo','Swaggins','bigbilbo@theshire.com','password',true),
+(1,'normalUser','Average','McMediocre','beanzmeanzheinz@idontknow.com','password2',false);

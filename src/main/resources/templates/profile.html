@@ -13,26 +13,26 @@
     <div class="row">
         <div class="col-md-6">
             <h1 class="h1 mb-3 font-weight-normal">Profile</h1>
-            <form th:action="@{|/user/profile/${user.id}|}" method="post" class="p-3 rounded login-signup-form">
+            <form action="/user/profile" method="post" class="p-3 rounded login-signup-form">
                 <div class="form-group ">
-                    <label for="profile-username">Username</label>
-                    <input type="text" class="form-control" id="profile-username" th:placeholder="${user.username}" required>
+                    <label for="username">Username</label>
+                    <input type="text" class="form-control" name="username" id="username" th:placeholder="${user.username}" required>
                 </div>
                 <div class="form-group">
-                    <label for="profile-email">Email Address</label>
-                    <input type="email" class="form-control" id="profile-email" th:placeholder="${user.email}" required>
+                    <label for="email">Email Address</label>
+                    <input type="email" class="form-control" name="email" id="email" th:placeholder="${user.email}" required>
                 </div>
                 <div class="form-group">
-                    <label for="profile-first_name">First Name</label>
-                    <input type="text" class="form-control" id="profile-first_name" th:placeholder="${user.firstname}" required>
+                    <label for="firstname">First Name</label>
+                    <input type="text" class="form-control" name="firstname" id="firstname" th:placeholder="${user.firstname}" required>
                 </div>
                 <div class="form-group">
-                    <label for="profile-surname">Surname</label>
-                    <input type="text" class="form-control" id="profile-surname" th:placeholder="${user.lastname}" required>
+                    <label for="lastname">Surname</label>
+                    <input type="text" class="form-control" name="lastname" id="lastname" th:placeholder="${user.lastname}" required>
                 </div>
                 <div class="form-group">
-                    <label for="profile-password">Password</label>
-                    <input type="password" class="form-control" id="profile-password" th:placeholder="${user.password}" required>
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" name="password" id="password" required>
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
