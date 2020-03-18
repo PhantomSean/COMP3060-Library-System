@@ -1,7 +1,9 @@
 package ie.mcwebdeveloper.project.controller;
 
 import ie.mcwebdeveloper.project.UserSession;
+import ie.mcwebdeveloper.project.models.Book;
 import ie.mcwebdeveloper.project.models.User;
+import ie.mcwebdeveloper.project.repositories.BookRepository;
 import ie.mcwebdeveloper.project.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +20,9 @@ public class LibraryController {
 
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    BookRepository bookRepository;
 
     @GetMapping("/")
     public String getLanding(Model model) {
@@ -61,7 +66,6 @@ public class LibraryController {
 
     @PostMapping("/user/profile")
     public String changeProfile(User theUser, Model model) {
-        System.out.println(theUser.getUsername());
         User currUser = userSession.getUser();
         boolean usernameTaken = false, emailTaken = false;
         if(userRepository.existsByUsername(theUser.getUsername()))
@@ -88,5 +92,11 @@ public class LibraryController {
             model.addAttribute("user", userSession.getUser());
             return "manage.html";
         }
+    }
+
+    @PostMapping("/admin/manage/")
+    public String addBook(Book theBook, Model model) {
+        bookRepository.save(theBook);
+        return "redirect:/admin/manage/" + userSession.getUser().getId();
     }
 }

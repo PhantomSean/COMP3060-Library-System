@@ -1,38 +1,47 @@
 package ie.mcwebdeveloper.project.models;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.sql.Date;
+
 
 @Entity
-@Table(name="Books")
+@Table(name = "book")
 public class Book {
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
     private String title;
     private String author;
-    private boolean available;
-    private boolean reserved;
-    private long userId;
-    private long reservedId;
-    private Date dueDate;
+    private boolean available = true;
+    private boolean reserved = false;
+    @Column(nullable = true)
+    private Long userid = null;
+    @Column(nullable = true)
+    private Long reservedid = null;
+    @Column(nullable = true)
+    private Date duedate = null;
 
     protected Book() {};
 
-    public Book(String title, String author, boolean available, boolean reserved, long userId, long reservedId, Date dueDate) {
+    public Book(String title, String author) {
+        this.title = title;
+        this.author = author;
+    }
+
+    public Book(String title, String author, boolean available, boolean reserved, long userid, long reservedid, Date dueDate) {
         this.title = title;
         this.author = author;
         this.available = available;
         this.reserved = reserved;
-        this.userId = userId;
-        this.reservedId = reservedId;
-        this.dueDate = dueDate;
+        this.userid = userid;
+        this.reservedid = reservedid;
+        this.duedate = dueDate;
     }
 
     public long getId() {
         return id;
     }
+
     public void setId(long id) {
         this.id = id;
     }
@@ -40,6 +49,7 @@ public class Book {
     public String getTitle() {
         return title;
     }
+
     public void setTitle(String title) {
         this.title = title;
     }
@@ -47,6 +57,7 @@ public class Book {
     public String getAuthor() {
         return author;
     }
+
     public void setAuthor(String author) {
         this.author = author;
     }
@@ -54,6 +65,7 @@ public class Book {
     public boolean isAvailable() {
         return available;
     }
+
     public void setAvailable(boolean available) {
         this.available = available;
     }
@@ -61,28 +73,24 @@ public class Book {
     public boolean isReserved() {
         return reserved;
     }
+
     public void setReserved(boolean reserved) {
         this.reserved = reserved;
     }
 
-    public long getUserID() {
-        return userId;
-    }
-    public void setUserID(long userID) {
-        this.userId = userID;
+    public Long getUserid() {
+        return userid;
     }
 
-    public long getReservedID() {
-        return reservedId;
-    }
-    public void setReservedID(long reservedID) {
-        this.reservedId = reservedID;
+    public void setUserid(long userid) {
+        this.userid = userid;
     }
 
-    public Date getDueDate() {
-        return dueDate;
+    public Long getReservedid() {
+        return reservedid;
     }
-    public void setDueDate(Date dueDate) {
-        this.dueDate = dueDate;
+
+    public void setReservedid(long reservedid) {
+        this.reservedid = reservedid;
     }
 }
