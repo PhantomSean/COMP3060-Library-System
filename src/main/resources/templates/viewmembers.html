@@ -9,7 +9,7 @@
         <div class="row">
             <div class="col-md-6">
                 <h1 class="h1 mb-3 font-weight-normal">Add Book</h1>
-                <form action="/searchmembers" method="GET" class="p-3 rounded login-signup-form">
+                <form action="/admin/manage/view-members" method="GET" class="p-3 rounded login-signup-form">
                     <div class="form-group">
                         <table class="table">
                             <thead>
@@ -17,7 +17,7 @@
                                     <th>ID</th>
                                     <th>Username</th>
                                     <th>First Name</th>
-                                    <th>Surname</th>
+                                    <th>Last Name</th>
                                     <th>Email</th>
                                     <th>Profile</th>
                                 </tr>
@@ -29,15 +29,17 @@
                                     </tr>
                                 </div>
                                 <div th:unless="${users == null}">
-                                    <div th:if="${user.role != 'admin'}">
-                                        <tr th:each="user : ${users}">
-                                            <td th:text="${user.id}">ID</td>
-                                            <td th:text="${user.username}">Username</td>
-                                            <td th:text="${user.firstname}">First Name</td>
-                                            <td th:text="${user.lastname}">Surname</td>
-                                            <td th:text="${user.email}">Email</td>
-                                            <td><button class="btn btn-primary">View</button></td>
-                                        </tr>
+                                    <div th:each="user : ${users}">
+                                        <div th:if="${user.librarian == false}">
+                                            <tr>
+                                                <td th:text="${user.id}">ID</td>
+                                                <td th:text="${user.username}">Username</td>
+                                                <td th:text="${user.firstname}">First Name</td>
+                                                <td th:text="${user.lastname}">Surname</td>
+                                                <td th:text="${user.email}">Email</td>
+                                                <td><button class="btn btn-primary">View</button></td>
+                                            </tr>
+                                        </div>
                                     </div>
                                 </div>
                             </tbody>

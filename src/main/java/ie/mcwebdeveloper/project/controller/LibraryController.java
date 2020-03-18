@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.List;
+
 @Controller
 public class LibraryController {
 
@@ -94,9 +96,21 @@ public class LibraryController {
         }
     }
 
-    @PostMapping("/admin/manage/")
+    @PostMapping("/admin/manage")
     public String addBook(Book theBook, Model model) {
         bookRepository.save(theBook);
         return "redirect:/admin/manage/" + userSession.getUser().getId();
+    }
+
+    @GetMapping("/admin/manage/view-members")
+    public String viewMembers(Model model) {
+        if(userSession.getUser() == null) {
+            return "redirect:/login";
+        } else {
+            model.addAttribute("title", "LMS - View Members");
+            List<User> users = userRepository.findAll();
+            model.addAttribute("users", users);
+            return "viewmembers.html";
+        }
     }
 }
