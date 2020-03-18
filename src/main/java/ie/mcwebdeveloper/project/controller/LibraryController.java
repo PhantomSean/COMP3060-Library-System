@@ -113,4 +113,16 @@ public class LibraryController {
             return "viewmembers.html";
         }
     }
+
+    @GetMapping("admin/manage/view-books")
+    public String viewBooks(Model model) {
+        if(userSession.getUser() == null) {
+            return "redirect:/login";
+        } else {
+            model.addAttribute("title", "LMS - View Books");
+            List<Book> books = bookRepository.findAll();
+            model.addAttribute("books", books);
+            return "viewbooks.html";
+        }
+    }
 }

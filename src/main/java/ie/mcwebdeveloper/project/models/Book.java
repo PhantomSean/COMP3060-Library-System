@@ -93,4 +93,12 @@ public class Book {
     public void setReservedid(long reservedid) {
         this.reservedid = reservedid;
     }
+
+
+    public Date getDuedate() {
+        return duedate;
+    }
+    public void setDuedate(Date duedate) {
+        this.duedate = duedate;
+    }
 }
