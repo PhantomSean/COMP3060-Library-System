@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class LibraryController {
@@ -123,6 +124,19 @@ public class LibraryController {
             List<Book> books = bookRepository.findAll();
             model.addAttribute("books", books);
             return "viewbooks.html";
+        }
+    }
+
+    @GetMapping("admin/manage/view-members/{id}")
+    public String viewMember(@PathVariable String id, Model model) {
+        if(userSession.getUser() == null) {
+            return "redirect:/login";
+        } else {
+            model.addAttribute("title", "LMS - Edit Member");
+            Long i = Long.parseLong(id);
+            Optional<User> user = userRepository.findById(i);
+            model.addAttribute("user", user);
+            return "editmember.html";
         }
     }
 }
