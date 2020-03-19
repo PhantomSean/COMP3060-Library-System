@@ -9,4 +9,5 @@ INSERT INTO book(id,title,author,available,reserved,userid,reservedid,dueDate)
 VALUES
 (0,'Generic Book 1','Skippy McGee',true,false,null,null,null),
 (1,'Some Other Book','Lance Butterscotch',false,true,1,2,'2020-03-25'),
-(2,'Yet Another Book','Zest McLemon',false,false,2,null,'2020-03-22');
+(2,'Some Other Book 2','Lance Butterscotch',false,false,1,null,'2020-03-25'),
+(3,'Yet Another Book','Zest McLemon',false,false,2,null,'2020-03-22');

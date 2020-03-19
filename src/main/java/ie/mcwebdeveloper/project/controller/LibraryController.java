@@ -139,4 +139,19 @@ public class LibraryController {
             return "editmember.html";
         }
     }
+
+    @GetMapping("user/profile/{id}/loans")
+    public String viewLoans(@PathVariable String id, Model model) {
+        if(userSession.getUser() == null) {
+            return "redirect:/login";
+        } else {
+            model.addAttribute("title", "LMS - View Loans");
+            Long i = Long.parseLong(id);
+            Optional<User> user = userRepository.findById(i);
+            List<Book> currBooks = bookRepository.findAllByUserid(i);
+            model.addAttribute("currBooks", currBooks);
+            return "loaninfo.html";
+        }
+    }
+
 }
