@@ -13,8 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.servlet.http.HttpServletResponse;
-import java.util.Optional;
+import java.util.List;
 
 @Controller
 public class LibraryController {
@@ -35,6 +34,7 @@ public class LibraryController {
         return "index.html";
     }
 
+<<<<<<< HEAD
     @GetMapping("/login")
     public String getLogin() {
         return "login.html";
@@ -101,9 +101,32 @@ public class LibraryController {
    public String getAddBook() {
        return "addbook.html";
    }
+=======
+    @GetMapping("/search")
+    public String getSearch(Model model) {
+        model.addAttribute("title", "LMS - Search");
+        return "search.html";
+    }
+
+    //    @PostMapping("/")
+//    public String loginMember() {
+//        return "/";
+//    }
+    // Browse
+//    @GetMapping("/browse")
+//    public String getBrowse() {
+//        return "browse.html";
+//    }
+    // View Library (Show)
+//    @GetMapping("/browse/{id}")
+//    public String showLibrary() {
+//        return "browse.html";
+//    }
+>>>>>>> ace65a0b93c39df30c4652d87dd25d8337e76c22
 
     @GetMapping("/user/profile/{id}")
     public String getProfile(@PathVariable String id, Model model){
+        model.addAttribute("title", "LMS - Profile");
         if(userSession.getUser() == null) {
             return "redirect:/login";
         } else {
@@ -113,23 +136,63 @@ public class LibraryController {
         }
     }
 
-    @PostMapping("/user/profile/{id}")
-    public String changeProfile(@PathVariable String id, User theUser, Model model) {
+    @PostMapping("/user/profile")
+    public String changeProfile(User theUser, Model model) {
+        User currUser = userSession.getUser();
         boolean usernameTaken = false, emailTaken = false;
-        long i = Long.parseLong(id);
         if(userRepository.existsByUsername(theUser.getUsername()))
             usernameTaken = true;
         if(userRepository.existsByEmail(theUser.getEmail()))
             emailTaken = true;
 
         if(!usernameTaken && !emailTaken) {
-            Optional<User> userToUpdate = userRepository.findById(i);
-            userRepository.updateUser(theUser.getUsername(), theUser.getFirstname(), theUser.getLastname(), theUser.getEmail(), theUser.getPassword(), i);
+            userRepository.updateUser(theUser.getUsername(), theUser.getFirstname(), theUser.getLastname(), theUser.getEmail(), theUser.getPassword(), currUser.getId());
             model.addAttribute("success", true);
-            return "redirect:/user/profile/" + id;
+            return "redirect:/user/profile/" + currUser.getId();
         } else {
             model.addAttribute("success", false);
-            return "redirect:/user/profile/" + id;
+            return "redirect:/user/profile/" + currUser.getId();
+        }
+    }
+
+    @GetMapping("/admin/manage/{id}")
+    public String getManage(@PathVariable String id, Model model) {
+        if(userSession.getUser() == null) {
+            return "redirect:/login";
+        } else {
+            model.addAttribute("title", "LMS - Manage");
+            model.addAttribute("user", userSession.getUser());
+            return "manage.html";
+        }
+    }
+
+    @PostMapping("/admin/manage")
+    public String addBook(Book theBook, Model model) {
+        bookRepository.save(theBook);
+        return "redirect:/admin/manage/" + userSession.getUser().getId();
+    }
+
+    @GetMapping("/admin/manage/view-members")
+    public String viewMembers(Model model) {
+        if(userSession.getUser() == null) {
+            return "redirect:/login";
+        } else {
+            model.addAttribute("title", "LMS - View Members");
+            List<User> users = userRepository.findAll();
+            model.addAttribute("users", users);
+            return "viewmembers.html";
+        }
+    }
+
+    @GetMapping("admin/manage/view-books")
+    public String viewBooks(Model model) {
+        if(userSession.getUser() == null) {
+            return "redirect:/login";
+        } else {
+            model.addAttribute("title", "LMS - View Books");
+            List<Book> books = bookRepository.findAll();
+            model.addAttribute("books", books);
+            return "viewbooks.html";
         }
     }
 }

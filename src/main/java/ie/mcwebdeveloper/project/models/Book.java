@@ -1,46 +1,65 @@
 package ie.mcwebdeveloper.project.models;
 
 import javax.persistence.*;
+import java.sql.Date;
+
 
 @Entity
+<<<<<<< HEAD
 @Table(name="book")
+=======
+@Table(name = "book")
+>>>>>>> ace65a0b93c39df30c4652d87dd25d8337e76c22
 public class Book {
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
     private String title;
     private String author;
+<<<<<<< HEAD
     private boolean available;
     private boolean reserved;
     // private long userID;
+=======
+    private boolean available = true;
+    private boolean reserved = false;
+    @Column(nullable = true)
+    private Long userid = null;
+    @Column(nullable = true)
+    private Long reservedid = null;
+    @Column(nullable = true)
+    private Date duedate = null;
+>>>>>>> ace65a0b93c39df30c4652d87dd25d8337e76c22
 
     protected Book() {};
 
-    public Book(String title, String author, boolean available, boolean reserved) {
+    public Book(String title, String author) {
+        this.title = title;
+        this.author = author;
+    }
+
+    public Book(String title, String author, boolean available, boolean reserved, long userid, long reservedid, Date dueDate) {
         this.title = title;
         this.author = author;
         this.available = available;
         this.reserved = reserved;
+        this.userid = userid;
+        this.reservedid = reservedid;
+        this.duedate = dueDate;
     }
 
     public long getId() {
         return id;
     }
+
     public void setId(long id) {
         this.id = id;
     }
 
-//    public Library getLibrary() {
-//        return library;
-//    }
-//    public void setLibrary(Library library) {
-//        this.library = library;
-//    }
-
     public String getTitle() {
         return title;
     }
+
     public void setTitle(String title) {
         this.title = title;
     }
@@ -48,21 +67,48 @@ public class Book {
     public String getAuthor() {
         return author;
     }
+
     public void setAuthor(String author) {
         this.author = author;
     }
 
-    public boolean getAvailable() {
+    public boolean isAvailable() {
         return available;
     }
+
     public void setAvailable(boolean available) {
         this.available = available;
     }
 
-    public boolean getReserved() {
+    public boolean isReserved() {
         return reserved;
     }
+
     public void setReserved(boolean reserved) {
         this.reserved = reserved;
+    }
+
+    public Long getUserid() {
+        return userid;
+    }
+
+    public void setUserid(long userid) {
+        this.userid = userid;
+    }
+
+    public Long getReservedid() {
+        return reservedid;
+    }
+
+    public void setReservedid(long reservedid) {
+        this.reservedid = reservedid;
+    }
+
+
+    public Date getDuedate() {
+        return duedate;
+    }
+    public void setDuedate(Date duedate) {
+        this.duedate = duedate;
     }
 }

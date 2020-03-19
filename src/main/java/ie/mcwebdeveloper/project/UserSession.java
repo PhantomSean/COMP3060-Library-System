@@ -9,6 +9,7 @@ import org.springframework.web.context.annotation.SessionScope;
 public class UserSession {
     private User user;
     private boolean loginFailed;
+    private boolean signupFailed;
 
     public User getUser() {
         return user;
@@ -25,4 +26,8 @@ public class UserSession {
     public void setLoginFailed(boolean loginFailed) {
         this.loginFailed = loginFailed;
     }
+
+    public boolean isSignupFailed() { return signupFailed; }
+
+    public void setSignupFailed(boolean signupFailed) { this.signupFailed = signupFailed; }
 }

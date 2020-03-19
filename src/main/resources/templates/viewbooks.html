@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<div th:replace="fragments/header.html"></div>
+<body>
+<div th:replace="fragments/navbar.html"></div>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6">
+            <h1 class="h1 mb-3 font-weight-normal">Add Book</h1>
+            <form action="/admin/manage/view-members" method="GET" class="p-3 rounded login-signup-form">
+                <div class="form-group">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Title</th>
+                            <th>Author</th>
+                            <th>Available</th>
+                            <th>Reserved</th>
+                            <th>UserID</th>
+                            <th>ReservedID</th>
+                            <th>Due Date</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <div th:if="${books == null}">
+                                <tr>
+                                    <td>No books</td>
+                                </tr>
+                            </div>
+                            <div th:unless="${books == null}">
+                                <div th:each="book : ${books}">
+                                    <tr>
+                                        <td th:text="${book.id}"></td>
+                                        <td th:text="${book.title}"></td>
+                                        <td th:text="${book.author}"></td>
+                                        <td th:text="${book.available}"></td>
+                                        <td th:text="${book.reserved}"></td>
+                                        <td th:text="${book.userid}"></td>
+                                        <td th:text="${book.reservedid}"></td>
+                                        <td th:text="${book.duedate}"></td>
+                                        <td><button class="btn btn-primary">View</button></td>
+                                    </tr>
+                                </div>
+                            </div>
+                        </tbody>
+                    </table>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div th:replace="fragments/footer.html"></div>
+</body>
+</html>
