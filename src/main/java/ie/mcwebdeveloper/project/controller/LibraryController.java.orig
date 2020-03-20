@@ -35,6 +35,8 @@ public class LibraryController {
         return "index.html";
     }
 
+<<<<<<< HEAD
+<<<<<<< HEAD
     @GetMapping("/login")
     public String getLogin() {
         return "login.html";
@@ -101,12 +103,13 @@ public class LibraryController {
    public String getAddBook() {
        return "addbook.html";
    }
+=======
     @GetMapping("/search")
     public String getSearch(Model model) {
-    }
-
+=======
     @GetMapping("/books")
     public String getSearch(@RequestParam (value = "search", required = false) String search, Model model) {
+>>>>>>> 289f4283727a796e016e26a99fd19d5f9ddc122b
         model.addAttribute("title", "LMS - Search");
         List<Book> books = bookRepository.findAllByTitleOrAuthorLike(search);
         model.addAttribute("books", books);
@@ -127,6 +130,7 @@ public class LibraryController {
 //    public String showLibrary() {
 //        return "browse.html";
 //    }
+>>>>>>> ace65a0b93c39df30c4652d87dd25d8337e76c22
 
     @GetMapping("/user/profile/{id}")
     public String getProfile(@PathVariable String id, Model model){
@@ -199,7 +203,10 @@ public class LibraryController {
             return "viewbooks.html";
         }
     }
+<<<<<<< HEAD
 }
+=======
+
     @GetMapping("admin/manage/view-members/{id}")
     public String viewMember(@PathVariable String id, Model model) {
         if(userSession.getUser() == null) {
@@ -228,3 +235,4 @@ public class LibraryController {
     }
 
 }
+>>>>>>> 289f4283727a796e016e26a99fd19d5f9ddc122b
