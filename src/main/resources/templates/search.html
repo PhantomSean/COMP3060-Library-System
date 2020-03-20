@@ -13,7 +13,12 @@
                 <th>Author</th>
                 <th>Available</th>
                 <th>Reserved</th>
-                <th></th>
+                <div th:if="${user != null and user.librarian == false} ">
+                    <th>Loan Book</th>
+                </div>
+                <div th:if="${user != null and user.librarian == false} ">
+                    <th>Reserve Book</th>
+                </div>
             </tr>
         </thead>
         <tbody>
@@ -29,6 +34,17 @@
                         <td th:text="${book.author}"></td>
                         <td th:text="${book.available}"></td>
                         <td th:text="${book.reserved}"></td>
+                        <div th:if="${user != null and user.librarian == false}">
+                            <td><a th:href="@{|user/loan-book/${book.id}|}">
+                                    <button th:disabled="${book.available == false}" class="btn btn-primary">Loan Book</button>
+                                </a>
+                            </td>
+                            <td>
+                                <a th:href="@{|user/reserve-book/${book.id}|}">
+                                    <button th:disabled="${book.reserved == true}" class="btn btn-primary">Reserve Book</button>
+                                </a>
+                            </td>
+                        </div>
                     </tr>
                 </div>
             </div>

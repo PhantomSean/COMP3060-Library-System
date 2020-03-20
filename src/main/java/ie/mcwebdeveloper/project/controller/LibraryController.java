@@ -42,6 +42,7 @@ public class LibraryController {
         model.addAttribute("title", "LMS - Search");
         List<Book> books = bookRepository.findAllByTitleOrAuthorLike(search);
         model.addAttribute("books", books);
+        model.addAttribute("user", userSession.getUser());
         return "search.html";
     }
 
@@ -161,15 +162,47 @@ public class LibraryController {
 
     @GetMapping("/user/profile/loans/{id}/renew")
     public String renewLoan(@PathVariable String id, Model model) {
-        long i = Long.parseLong(id);
-        Optional<Book> book = bookRepository.findById(i);
-        Book b = book.get();
-        LocalDate oldDate = b.getDuedate().toLocalDate();
-        LocalDate newDate = oldDate.plusWeeks(1);
-        Date result = Date.valueOf(newDate);
-        bookRepository.renewLoan(result, i);
+        if(userSession.getUser() == null) {
+            return "redirect:/login";
+        } else {
+            long i = Long.parseLong(id);
+            Optional<Book> book = bookRepository.findById(i);
+            Book b = book.get();
+            LocalDate oldDate = b.getDuedate().toLocalDate();
+            LocalDate newDate = oldDate.plusWeeks(1);
+            Date result = Date.valueOf(newDate);
+            bookRepository.renewLoan(result, i);
 //        model.addAttribute("message", "Loan renewed successfully.");
-        return "redirect:/user/profile/" + userSession.getUser().getId() + "/loans";
+            return "redirect:/user/profile/" + userSession.getUser().getId() + "/loans";
+        }
+    }
+
+    @GetMapping("/user/loan-book/{id}")
+    public String loanBook(@PathVariable String id, Model model) {
+        if(userSession.getUser() == null) {
+            return "redirect:/login";
+        } else {
+            long i = Long.parseLong(id);
+            Optional<Book> book = bookRepository.findById(i);
+            Book b = book.get();
+            bookRepository.newLoanee(userSession.getUser().getId(), i);
+//        model.addAttribute("message", "Loaned book successfully.");
+            return "redirect:/books";
+        }
+    }
+
+    @GetMapping("/user/reserve-book/{id}")
+    public String reserveBook(@PathVariable String id, Model model) {
+        if(userSession.getUser() == null) {
+            return "redirect:/login";
+        } else {
+            long i = Long.parseLong(id);
+            Optional<Book> book = bookRepository.findById(i);
+            Book b = book.get();
+            bookRepository.newReservee(userSession.getUser().getId(), i);
+//          model.addAttribute("message", "Reserved book successfully.");
+            return "redirect:/books";
+        }
     }
 
 }

@@ -21,4 +21,12 @@ public interface BookRepository extends JpaRepository<Book, Long> {
     @Modifying
     @Query("update Book b set b.duedate = ?1 where b.id = ?2")
     int renewLoan(Date date, long id);
+    @Transactional
+    @Modifying
+    @Query("update Book b set b.userid = ?1, b.available = false where b.id = ?2")
+    int newLoanee(long uid, long bid);
+    @Transactional
+    @Modifying
+    @Query("update Book b set b.reservedid = ?1, b.reserved = true, b.available = false where b.id = ?2")
+    int newReservee(long uid, long bid);
 }
