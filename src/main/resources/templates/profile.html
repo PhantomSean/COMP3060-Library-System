@@ -7,8 +7,7 @@
 <!-- Profile page -->
 <div class="container mt-5">
     <div>
-        <button class="btn btn-primary">View Loan History</button>
-        <button class="btn btn-primary">View Current Loans</button>
+        <a th:href="@{|/user/profile/${user.id}/loans|}"><button class="btn btn-primary">View Loan Information</button></a>
     </div>
     <div class="row">
         <div class="col-md-6">

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class LibraryController {
@@ -34,6 +35,7 @@ public class LibraryController {
         return "index.html";
     }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
     @GetMapping("/login")
     public String getLogin() {
@@ -104,7 +106,13 @@ public class LibraryController {
 =======
     @GetMapping("/search")
     public String getSearch(Model model) {
+=======
+    @GetMapping("/books")
+    public String getSearch(@RequestParam (value = "search", required = false) String search, Model model) {
+>>>>>>> 289f4283727a796e016e26a99fd19d5f9ddc122b
         model.addAttribute("title", "LMS - Search");
+        List<Book> books = bookRepository.findAllByTitleOrAuthorLike(search);
+        model.addAttribute("books", books);
         return "search.html";
     }
 
@@ -195,4 +203,36 @@ public class LibraryController {
             return "viewbooks.html";
         }
     }
+<<<<<<< HEAD
 }
+=======
+
+    @GetMapping("admin/manage/view-members/{id}")
+    public String viewMember(@PathVariable String id, Model model) {
+        if(userSession.getUser() == null) {
+            return "redirect:/login";
+        } else {
+            model.addAttribute("title", "LMS - Edit Member");
+            Long i = Long.parseLong(id);
+            Optional<User> user = userRepository.findById(i);
+            model.addAttribute("user", user);
+            return "editmember.html";
+        }
+    }
+
+    @GetMapping("user/profile/{id}/loans")
+    public String viewLoans(@PathVariable String id, Model model) {
+        if(userSession.getUser() == null) {
+            return "redirect:/login";
+        } else {
+            model.addAttribute("title", "LMS - View Loans");
+            Long i = Long.parseLong(id);
+            Optional<User> user = userRepository.findById(i);
+            List<Book> currBooks = bookRepository.findAllByUserid(i);
+            model.addAttribute("currBooks", currBooks);
+            return "loaninfo.html";
+        }
+    }
+
+}
+>>>>>>> 289f4283727a796e016e26a99fd19d5f9ddc122b

@@ -36,9 +36,15 @@
                 </li>
             </div>
         </ul>
+<<<<<<< HEAD
         <form class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-light my-2 my-sm-0" type="submit" href="/browse">Search</button>
+=======
+        <form th:object="${book}" th:action="@{/books}" method="get" class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="text" name="search" id="search" th:value="${search}" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-light my-2 my-sm-0" type="submit" value="Search">Search</button>
+>>>>>>> 289f4283727a796e016e26a99fd19d5f9ddc122b
         </form>
     </div>
 </nav>
