@@ -1,91 +1,48 @@
-<!--&lt;!&ndash; For browsing libraries  &ndash;&gt;-->
-<!--<!DOCTYPE html>-->
-<!--<html lang="en">-->
-<!--<head>-->
-    <!--<meta charset="UTF-8">-->
-    <!--<title>LMS</title>-->
-    <!--&lt;!&ndash; Bootstrap CSS &ndash;&gt;-->
-    <!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">-->
-    <!--<link rel="stylesheet" href="app.css">-->
-<!--</head>-->
-<!--<body>-->
-    <!--<nav class="navbar navbar-expand-lg navbar-dark bg-primary px-4">-->
-        <!--<a class="navbar-brand" href="/">LMS</a>-->
-        <!--<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">-->
-            <!--<span class="navbar-toggler-icon"></span>-->
-        <!--</button>-->
+<!-- For browsing catalogue of selected library -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<div th:replace="fragments/header.html"></div>
+<body>
+<div th:replace="fragments/navbar.html"></div>
 
-        <!--<div class="collapse navbar-collapse" id="navbarSupportedContent">-->
-            <!--<ul class="navbar-nav ml-auto mr-3">-->
-                <!--<li class="nav-item active">-->
-                    <!--<a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>-->
-                <!--</li>-->
-                <!--<li class="nav-item">-->
-                    <!--<a class="nav-link" href="#">About</a>-->
-                <!--</li>-->
-                <!--<li class="nav-item">-->
-                    <!--<a class="nav-link" href="#">Contact Us</a>-->
-                <!--</li>-->
-                <!--<li class="nav-item">-->
-                    <!--<a class="nav-link" href="/login">Login</a>-->
-                <!--</li>-->
-            <!--</ul>-->
-            <!--<form class="form-inline my-2 my-lg-0">-->
-                <!--<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">-->
-                <!--<button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>-->
-            <!--</form>-->
-        <!--</div>-->
-    <!--</nav>-->
-    <!--<div class="jumbotron browse-jumbotron">-->
-        <!--<div class="container">-->
-            <!--<div class="text-center">-->
-                <!--<h1 class="display-3">Browse Our Libraries</h1>-->
-            <!--</div>-->
-        <!--</div>-->
-    <!--</div>-->
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-6">
+                <form action="/searchmembers" method="GET" class="p-3 rounded login-signup-form">
+                    <div class="form-group">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Author</th>
+                                    <th>Available</th>
+                                    <th>Reserved</th>
+                                    <th>Request</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <div th:if="${books == null}">
+                                    <tr>
+                                        <td>No Books</td>
+                                    </tr>
+                                </div>
+                                <div th:unless="${books == null}">
+                                    <tr th:each="book : ${books}">
+                                        <td th:text="${book.title}">Title</td>
+                                        <td th:text="${book.author}">Author</td>
+                                        <td th:text="${book.available}">Available</td>
+                                        <td th:text="${book.reserved}">Reserved</td>
+                                        <td><button class="btn btn-primary">Request</button></td>
+                                    </tr>
+                                </div>
+                            </tbody>
+                        </table>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
-    <!--<div class="container mt-4">-->
-        <!--<div class="row">-->
-            <!--<div class="col-md-4 col-sm-6">-->
-                <!--<div class="card bg-dark">-->
-                    <!--<img class="card-img-top" src="https://www.leinsterleader.ie/resizer/600/315/true/GN4_DAT_12407704.jpg&#45;&#45;no_plans_to_knock_naas_library_building_once_facility_is_moved.jpg" alt="Card image cap">-->
-                    <!--<div class="card-body">-->
-                        <!--<h5 class="card-title">Naas Library</h5>-->
-                        <!--<p class="card-text">A quaint little library situated in Naas, Co.Kildare. </p>-->
-                        <!--<a href="#" class="btn btn-outline-light">More info</a>-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-            <!--<div class="col-md-4 col-sm-6">-->
-                <!--<div class="card bg-primary">-->
-                    <!--<img class="card-img-top" src="https://www.librariesireland.ie/sites/default/files/styles/traditional_television/public/media/images/2018-12/Central%20Library%20Letterkenny%20exterior.jpg?h=ae842452&itok=0bLn0Rta" alt="Card image cap">-->
-                    <!--<div class="card-body bg-dark">-->
-                        <!--<h5 class="card-title">Letterkenny Library</h5>-->
-                        <!--<p class="card-text">A nice little library situated in Letterkenny, Donegal </p>-->
-                        <!--<a href="#" class="btn btn-outline-light">More info</a>-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-            <!--<div class="col-md-4 col-sm-6">-->
-                <!--<div class="card bg-dark">-->
-                    <!--<img class="card-img-top" src="https://2.bp.blogspot.com/-T3kJ8DKIRpc/VNtPRl_pvHI/AAAAAAAABqE/bbAhpPLZ5AM/s1600/IMAG0389.jpg" alt="Card image cap">-->
-                    <!--<div class="card-body">-->
-                        <!--<h5 class="card-title">Celbridge Library</h5>-->
-                        <!--<p class="card-text">A sound little library situated in Celbridge, Co.Kildare. </p>-->
-                        <!--<a href="#" class="btn btn-outline-light">More info</a>-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-        <!--</div>-->
-    <!--</div>-->
-
-    <!--&lt;!&ndash; Future footer containing things like email, copright etc.  &ndash;&gt;-->
- <!---->
-
-    <!--<script src="../static/app.js"></script>-->
-    <!--&lt;!&ndash; // Bootstrap JS/JQuery &ndash;&gt;-->
-    <!--<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>-->
-    <!--<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>-->
-    <!--<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>-->
-<!--</body>-->
-<!--</html>-->
+<div th:replace="fragments/footer.html"></div>
+</body>
+</html>
