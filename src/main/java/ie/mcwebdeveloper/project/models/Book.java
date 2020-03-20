@@ -82,7 +82,7 @@ public class Book {
         return userid;
     }
 
-    public void setUserid(long userid) {
+    public void setUserid(Long userid) {
         this.userid = userid;
     }
 
@@ -90,7 +90,7 @@ public class Book {
         return reservedid;
     }
 
-    public void setReservedid(long reservedid) {
+    public void setReservedid(Long reservedid) {
         this.reservedid = reservedid;
     }
 

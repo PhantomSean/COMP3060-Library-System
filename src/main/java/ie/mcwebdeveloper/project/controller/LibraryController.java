@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -155,6 +157,19 @@ public class LibraryController {
             model.addAttribute("currBooks", currBooks);
             return "loaninfo.html";
         }
+    }
+
+    @GetMapping("/user/profile/loans/{id}/renew")
+    public String renewLoan(@PathVariable String id, Model model) {
+        long i = Long.parseLong(id);
+        Optional<Book> book = bookRepository.findById(i);
+        Book b = book.get();
+        LocalDate oldDate = b.getDuedate().toLocalDate();
+        LocalDate newDate = oldDate.plusWeeks(1);
+        Date result = Date.valueOf(newDate);
+        bookRepository.renewLoan(result, i);
+//        model.addAttribute("message", "Loan renewed successfully.");
+        return "redirect:/user/profile/" + userSession.getUser().getId() + "/loans";
     }
 
 }

@@ -5,13 +5,10 @@ VALUES
 (2,'normalUser2','Average2','McMediocre2','normie2@ucd.ie','password3',false),
 (3,'normalUser3','Average3','McMediocre3','normie3@ucd.ie','password4',false);
 
-INSERT INTO book(id,title,author,available,reserved,userid,reservedid,dueDate)
+INSERT INTO book(id,title,author,available,reserved,userid,reservedid,duedate)
 VALUES
 (0,'Generic Book 1','Skippy McGee',true,false,null,null,null),
 (1,'Some Other Book','Lance Butterscotch',false,true,1,2,'2020-03-25'),
-<<<<<<< HEAD
-(2,'Yet Another Book','Zest McLemon',false,false,2,null,'2020-03-22');
-=======
-(2,'Some Other Book 2','Lance Butterscotch',false,false,1,null,'2020-03-25'),
-(3,'Yet Another Book','Zest McLemon',false,false,2,null,'2020-03-22');
->>>>>>> 289f4283727a796e016e26a99fd19d5f9ddc122b
+(2,'Yet Another Book','Zest McLemon',false,false,2,null,'2020-03-22'),
+(3,'Some Other Book 2','Lance Butterscotch',false,false,1,null,'2020-03-25'),
+(4,'Yet Another Book','Zest McLemon',false,false,2,null,'2020-03-22');
