@@ -74,9 +74,9 @@
                             <td th:text="${book.reservedid}"></td>
                             <td th:text="${book.duedate}"></td>
                             <td>
-                                <a th:href="@{|admin/mark-book-as-returned/${book.id}|}">
-                                    <button th:disabled="${book.available == true}" class="btn btn-primary">Mark As Returned</button>
-                                </a>
+                                <form th:action="@{|/admin/mark-book-as-returned/${book.id}|}" method="post">
+                                    <button type="submit" th:disabled="${book.available == true}" class="btn btn-primary">Mark As Returned</button>
+                                </form>
                             </td>
                             <td>
                                 <form th:action="@{|/admin/loan-book-to-member/${book.id}|}" method="post">

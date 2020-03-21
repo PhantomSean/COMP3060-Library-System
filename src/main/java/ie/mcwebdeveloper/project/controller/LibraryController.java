@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.lang.StackWalker.Option;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -74,6 +73,14 @@ public class LibraryController {
     public String deleteBook(@PathVariable String id, Model model) {
         long i = Long.parseLong(id);
         bookRepository.deleteById(i);
+        model.addAttribute("user", userSession.getUser());
+        return "redirect:/books";
+    }
+
+    @PostMapping("/admin/mark-book-as-returned/{id}")
+    public String returnBook(@PathVariable String id, Model model) {
+        long i = Long.parseLong(id);
+        bookRepository.returnBook(i);
         model.addAttribute("user", userSession.getUser());
         return "redirect:/books";
     }
