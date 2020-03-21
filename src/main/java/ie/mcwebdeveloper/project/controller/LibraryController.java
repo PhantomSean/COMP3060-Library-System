@@ -182,6 +182,21 @@ public class LibraryController {
         }
     }
 
+    @GetMapping("/admin/manage/view-members/{id}/delete")
+    public String deleteMembers(@PathVariable String id, Model model) {
+        if(userSession.getUser() == null) {
+            return "redirect:/login";
+        } else {
+            Long i = Long.parseLong(id);
+            userRepository.deleteById(i);
+            model.addAttribute("title", "LMS - View Members");
+            List<User> users = userRepository.findAll();
+            model.addAttribute("users", users);
+            model.addAttribute("user", userSession.getUser());
+            return "redirect:/admin/manage/view-members";
+        }
+    }
+
     @GetMapping("user/profile/{id}/loans")
     public String viewLoans(@PathVariable String id, Model model) {
         if(userSession.getUser() == null) {
