@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.lang.StackWalker.Option;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -189,11 +190,32 @@ public class LibraryController {
         } else {
             Long i = Long.parseLong(id);
             userRepository.deleteById(i);
-            model.addAttribute("title", "LMS - View Members");
             List<User> users = userRepository.findAll();
             model.addAttribute("users", users);
             model.addAttribute("user", userSession.getUser());
             return "redirect:/admin/manage/view-members";
+        }
+    }
+
+    @GetMapping("/admin/manage/view-members/{id}/loans")
+    public String memberLoans(@PathVariable String id, Model model) {
+        if(userSession.getUser() == null) {
+            return "redirect:/login";
+        } else {
+            model.addAttribute("title", "LMS - Member Loans");
+            Long i = Long.parseLong(id);
+            User member = userRepository.findById(i).get();
+            List<Book> currBooks = bookRepository.findAllByUserid(i);
+            Long[] pastBookIds = loanHistoryRepository.findLoanHistoryOfUser(member.getId());
+            List<Book> pastBooks = new ArrayList<Book>(pastBookIds.length);
+            for(long ID : pastBookIds) {
+                Book book = bookRepository.findById(ID).get();
+                pastBooks.add(book);
+            }
+            model.addAttribute("currBooks", currBooks);
+            model.addAttribute("pastBooks", pastBooks);
+            model.addAttribute("user", member);
+            return "loaninfo.html";
         }
     }
 
