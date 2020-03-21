@@ -56,6 +56,16 @@ public class LibraryController {
         long i = Long.parseLong(id);
         long loaneeID = Long.parseLong(loanee);
         bookRepository.loanToMember(loaneeID, i);
+        model.addAttribute("user", userSession.getUser());
+        return "redirect:/books";
+    }
+
+    @PostMapping("/admin/reserve-book-to-member/{id}")
+    public String reserveBookToMember(@PathVariable String id, @RequestParam (value = "reservee", required = false) String reservee, Model model) {
+        long i = Long.parseLong(id);
+        long reserveeID = Long.parseLong(reservee);
+        bookRepository.reserveToMember(reserveeID, i);
+        model.addAttribute("user", userSession.getUser());
         return "redirect:/books";
     }
 

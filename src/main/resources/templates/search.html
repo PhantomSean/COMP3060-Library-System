@@ -80,6 +80,12 @@
                                     <button type="submit" class="btn btn-primary" value="Loanee" th:disabled="${book.available == false or book.reserved == true}">Submit</button>
                                 </form>
                             </td>
+                            <td>
+                                <form th:action="@{|/admin/reserve-book-to-member/${book.id}|}" method="post">
+                                    <input type="text" name="reservee" id="reservee" placeholder="Member ID" th:value="${reservee}">
+                                    <button type="submit" class="btn btn-primary" value="Reservee" th:disabled="${book.reserved == true}">Submit</button>
+                                </form>
+                            </td>
                         </div>
                     </tr>
                 </div>
