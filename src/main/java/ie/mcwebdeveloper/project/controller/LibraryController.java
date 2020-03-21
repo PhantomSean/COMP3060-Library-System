@@ -51,6 +51,14 @@ public class LibraryController {
         return "search.html";
     }
 
+    @PostMapping("/admin/loan-book-to-member/{id}")
+    public String loanBookToMember(@PathVariable String id, @RequestParam (value = "loanee", required = false) String loanee, Model model) {
+        long i = Long.parseLong(id);
+        long loaneeID = Long.parseLong(loanee);
+        bookRepository.loanToMember(loaneeID, i);
+        return "redirect:/books";
+    }
+
     //    @PostMapping("/")
 //    public String loginMember() {
 //        return "/";
@@ -205,7 +213,7 @@ public class LibraryController {
             Optional<Book> book = bookRepository.findById(i);
             Book b = book.get();
             bookRepository.newLoanee(userSession.getUser().getId(), i);
-//        model.addAttribute("message", "Loaned book successfully.");
+//          model.addAttribute("message", "Loaned book successfully.");
             model.addAttribute("user", userSession.getUser());
             return "redirect:/books";
         }

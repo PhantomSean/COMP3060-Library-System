@@ -14,7 +14,7 @@ VALUES
 (4,'Random Book','Jerry Jumbo',true,false,null,null,'2020-04-22'),
 (5,'Dead Calm','Dunno',false,true,3,3,'2020-03-28'),
 (6,'The Astounding Tales of Propeller Man','Oscar Little',false,false,1,null,'2020-03-22'),
-(7,'Turf: The Meaning of Life','Bogger OToole',true,true,2,3,'2020-03-30'),
+(7,'Turf: The Meaning of Life','Bogger OToole',true,true,null,3,'2020-03-30'),
 (8,'Kevamans Guide to Being Shit at LOL','Kevin Lalor',false,true,3,2,'2020-04-04'),
 (9,'Joe Sheehan: Living Life as a Loser','Joe Sheehan',false,false,2,null,'2020-03-28'),
 (10,'Generic Book 2: The Return of the Book','Skippy McGee',false,false,2,null,'2020-04-12');
