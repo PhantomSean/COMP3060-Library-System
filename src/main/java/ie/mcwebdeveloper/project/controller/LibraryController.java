@@ -167,7 +167,7 @@ public class LibraryController {
         } else {
             model.addAttribute("title", "LMS - Edit Member");
             Long i = Long.parseLong(id);
-            Optional<User> member = userRepository.findById(i);
+            User member = userRepository.findById(i).get();
             model.addAttribute("member", member);
             model.addAttribute("user", userSession.getUser());
             return "editmember.html";
