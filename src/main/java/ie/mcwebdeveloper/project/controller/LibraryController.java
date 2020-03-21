@@ -214,6 +214,24 @@ public class LibraryController {
         }
     }
 
+    @GetMapping("/admin/renew-loan-for-member/{id}")
+    public String renewLoanForMember(@PathVariable String id, Model model) {
+        if(userSession.getUser() == null) {
+            return "redirect:/login";
+        } else {
+            long i = Long.parseLong(id);
+            Optional<Book> book = bookRepository.findById(i);
+            Book b = book.get();
+            LocalDate oldDate = b.getDuedate().toLocalDate();
+            LocalDate newDate = oldDate.plusWeeks(1);
+            Date result = Date.valueOf(newDate);
+            bookRepository.renewLoan(result, i);
+//        model.addAttribute("message", "Loan renewed successfully.");
+            model.addAttribute("user", userSession.getUser());
+            return "redirect:/books";
+        }
+    }
+
     @GetMapping("/user/loan-book/{id}")
     public String loanBook(@PathVariable String id, Model model) {
         if(userSession.getUser() == null) {

@@ -26,6 +26,9 @@
                     <th>Current Reserved Id</th>
                 </div>
                 <div th:if="${user != null and user.librarian == true} ">
+                    <th>Due Date</th>
+                </div>
+                <div th:if="${user != null and user.librarian == true} ">
                     <th>Mark As Returned</th>
                 </div>
                 <div th:if="${user != null and user.librarian == true} ">
@@ -69,6 +72,7 @@
                         <div th:if="${user != null and user.librarian == true}">
                             <td th:text="${book.userid}"></td>
                             <td th:text="${book.reservedid}"></td>
+                            <td th:text="${book.duedate}"></td>
                             <td>
                                 <a th:href="@{|admin/mark-book-as-returned/${book.id}|}">
                                     <button th:disabled="${book.available == true}" class="btn btn-primary">Mark As Returned</button>
@@ -85,6 +89,9 @@
                                     <input type="text" name="reservee" id="reservee" placeholder="Member ID" th:value="${reservee}">
                                     <button type="submit" class="btn btn-primary" value="Reservee" th:disabled="${book.reserved == true}">Submit</button>
                                 </form>
+                            </td>
+                            <td>
+                                <a th:href="@{|/admin/renew-loan-for-member/${book.id}|}"><button th:disabled="${book.available == true}" class="btn btn-primary">Renew</button></a>
                             </td>
                         </div>
                     </tr>
