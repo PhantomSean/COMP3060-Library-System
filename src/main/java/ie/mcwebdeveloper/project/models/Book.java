@@ -21,7 +21,7 @@ public class Book {
     @Column(nullable = true)
     private Date duedate = null;
 
-    protected Book() {};
+    protected Book() {}
 
     public Book(String title, String author) {
         this.title = title;

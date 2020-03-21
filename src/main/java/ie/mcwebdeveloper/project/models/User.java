@@ -16,7 +16,7 @@ public class User {
     private String password;
     private boolean librarian;
 
-    public User () {}
+    protected User () {}
 
     public User(String username, String firstname, String lastname, String email, String password, boolean librarian) {
         this.username = username;
@@ -76,10 +76,4 @@ public class User {
         this.librarian = librarian;
     }
 
-//    public String getRole() {
-//        return role;
-//    }
-//    public void setRole(String role) {
-//        this.role = role;
-//    }
 }

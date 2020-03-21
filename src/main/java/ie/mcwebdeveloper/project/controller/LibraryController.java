@@ -4,6 +4,7 @@ import ie.mcwebdeveloper.project.UserSession;
 import ie.mcwebdeveloper.project.models.Book;
 import ie.mcwebdeveloper.project.models.User;
 import ie.mcwebdeveloper.project.repositories.BookRepository;
+import ie.mcwebdeveloper.project.repositories.LoanHistoryRepository;
 import ie.mcwebdeveloper.project.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,6 +31,9 @@ public class LibraryController {
 
     @Autowired
     BookRepository bookRepository;
+
+    @Autowired
+    LoanHistoryRepository loanHistoryRepository;
 
     @GetMapping("/")
     public String getLanding(Model model) {
@@ -88,6 +93,7 @@ public class LibraryController {
             return "redirect:/user/profile/" + currUser.getId();
         } else {
             model.addAttribute("success", false);
+            model.addAttribute("user", userSession.getUser());
             return "redirect:/user/profile/" + currUser.getId();
         }
     }
@@ -106,6 +112,7 @@ public class LibraryController {
     @PostMapping("/admin/manage")
     public String addBook(Book theBook, Model model) {
         bookRepository.save(theBook);
+        model.addAttribute("user", userSession.getUser());
         return "redirect:/admin/manage/" + userSession.getUser().getId();
     }
 
@@ -117,6 +124,7 @@ public class LibraryController {
             model.addAttribute("title", "LMS - View Members");
             List<User> users = userRepository.findAll();
             model.addAttribute("users", users);
+            model.addAttribute("user", userSession.getUser());
             return "viewmembers.html";
         }
     }
@@ -129,6 +137,7 @@ public class LibraryController {
             model.addAttribute("title", "LMS - View Books");
             List<Book> books = bookRepository.findAll();
             model.addAttribute("books", books);
+            model.addAttribute("user", userSession.getUser());
             return "viewbooks.html";
         }
     }
@@ -140,8 +149,9 @@ public class LibraryController {
         } else {
             model.addAttribute("title", "LMS - Edit Member");
             Long i = Long.parseLong(id);
-            Optional<User> user = userRepository.findById(i);
-            model.addAttribute("user", user);
+            Optional<User> member = userRepository.findById(i);
+            model.addAttribute("member", member);
+            model.addAttribute("user", userSession.getUser());
             return "editmember.html";
         }
     }
@@ -155,7 +165,15 @@ public class LibraryController {
             Long i = Long.parseLong(id);
             Optional<User> user = userRepository.findById(i);
             List<Book> currBooks = bookRepository.findAllByUserid(i);
+            Long[] pastBookIds = loanHistoryRepository.findLoanHistoryOfUser(userSession.getUser().getId());
+            List<Book> pastBooks = new ArrayList<Book>(pastBookIds.length);
+            for(long ID : pastBookIds) {
+                Book book = bookRepository.findById(ID).get();
+                pastBooks.add(book);
+            }
             model.addAttribute("currBooks", currBooks);
+            model.addAttribute("pastBooks", pastBooks);
+            model.addAttribute("user", userSession.getUser());
             return "loaninfo.html";
         }
     }
@@ -173,6 +191,7 @@ public class LibraryController {
             Date result = Date.valueOf(newDate);
             bookRepository.renewLoan(result, i);
 //        model.addAttribute("message", "Loan renewed successfully.");
+            model.addAttribute("user", userSession.getUser());
             return "redirect:/user/profile/" + userSession.getUser().getId() + "/loans";
         }
     }
@@ -187,6 +206,7 @@ public class LibraryController {
             Book b = book.get();
             bookRepository.newLoanee(userSession.getUser().getId(), i);
 //        model.addAttribute("message", "Loaned book successfully.");
+            model.addAttribute("user", userSession.getUser());
             return "redirect:/books";
         }
     }
@@ -200,6 +220,7 @@ public class LibraryController {
             Optional<Book> book = bookRepository.findById(i);
             Book b = book.get();
             bookRepository.newReservee(userSession.getUser().getId(), i);
+            model.addAttribute("user", userSession.getUser());
 //          model.addAttribute("message", "Reserved book successfully.");
             return "redirect:/books";
         }
