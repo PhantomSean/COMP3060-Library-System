@@ -15,6 +15,9 @@ import java.util.Optional;
 public interface BookRepository extends JpaRepository<Book, Long> {
     Optional<Book> findById(long id);
     List<Book> findAllByUserid(long userid); // To find current loans
+    @Modifying
+    @Query("delete from Book b where b.id = ?1")
+    int deleteById(long id);
     @Query("select b from Book b where lower(b.title) like lower(concat('%', ?1,'%')) or lower(b.author) like lower(concat('%', ?1,'%'))")
     List<Book> findAllByTitleOrAuthorLike(String author);
     @Transactional

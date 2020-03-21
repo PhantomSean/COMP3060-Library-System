@@ -93,6 +93,11 @@
                             <td>
                                 <a th:href="@{|/admin/renew-loan-for-member/${book.id}|}"><button th:disabled="${book.available == true}" class="btn btn-primary">Renew</button></a>
                             </td>
+                            <td>
+                                <form th:action="@{|/admin/delete-book/${book.id}|}" method="post">
+                                    <button type="submit" class="btn btn-danger" value="Delete">Delete</button>
+                                </form>
+                            </td>
                         </div>
                     </tr>
                 </div>

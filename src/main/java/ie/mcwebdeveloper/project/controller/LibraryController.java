@@ -69,6 +69,14 @@ public class LibraryController {
         return "redirect:/books";
     }
 
+    @PostMapping("/admin/delete-book/{id}")
+    public String deleteBook(@PathVariable String id, Model model) {
+        long i = Long.parseLong(id);
+        bookRepository.deleteById(i);
+        model.addAttribute("user", userSession.getUser());
+        return "redirect:/books";
+    }
+
     //    @PostMapping("/")
 //    public String loginMember() {
 //        return "/";
