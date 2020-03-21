@@ -47,7 +47,10 @@
                             <td th:text="${book.reserved}"></td>
                             <td th:text="${book.duedate}"></td>
                             <div th:if="${book.reserved == false}">
-                                <td><a th:href="@{|/user/profile/loans/${book.id}/renew|}"><button class="btn btn-primary">Renew Loan</button></a></td>
+                                <div th:switch="${user.librarian}">
+                                    <td th:case="true"><a th:href="@{|/admin/manage/view-members/${member.id}/${book.id}/renew|}"><button class="btn btn-primary">Renew Loan</button></a></td>
+                                    <td th:case="false"><a th:href="@{|/user/profile/loans/${book.id}/renew|}"><button class="btn btn-primary">Renew Loan</button></a></td>
+                                </div>
                             </div>
                         </tr>
                     </div>

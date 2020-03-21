@@ -221,8 +221,29 @@ public class LibraryController {
             }
             model.addAttribute("currBooks", currBooks);
             model.addAttribute("pastBooks", pastBooks);
-            model.addAttribute("user", member);
+            model.addAttribute("member", member);
+            model.addAttribute("user", userSession.getUser());
             return "loaninfo.html";
+        }
+    }
+
+    @GetMapping("/admin/manage/view-members/{memberId}/{bookId}/renew")
+    public String renewMemberLoan(@PathVariable String memberId, @PathVariable String bookId, Model model) {
+        if(userSession.getUser() == null) {
+            return "redirect:/login";
+        } else {
+            long i = Long.parseLong(bookId);
+            Optional<Book> book = bookRepository.findById(i);
+            Book b = book.get();
+            LocalDate oldDate = b.getDuedate().toLocalDate();
+            LocalDate newDate = oldDate.plusWeeks(1);
+            Date result = Date.valueOf(newDate);
+            bookRepository.renewLoan(result, i);
+//        model.addAttribute("message", "Loan renewed successfully.");
+            long id = Long.parseLong(memberId);
+            User member = userRepository.findById(id).get();
+            model.addAttribute("user", member);
+            return "redirect:/admin/manage/view-members/" + member.getId() + "/loans";
         }
     }
 
