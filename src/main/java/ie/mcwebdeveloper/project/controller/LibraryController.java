@@ -55,7 +55,10 @@ public class LibraryController {
     public String loanBookToMember(@PathVariable String id, @RequestParam (value = "loanee", required = false) String loanee, Model model) {
         long i = Long.parseLong(id);
         long loaneeID = Long.parseLong(loanee);
-        bookRepository.loanToMember(loaneeID, i);
+        LocalDate currDate = LocalDate.now();
+        LocalDate newDate = currDate.plusWeeks(1);
+        Date dueDate = Date.valueOf(newDate);
+        bookRepository.loanToMember(loaneeID, i, dueDate);
         model.addAttribute("user", userSession.getUser());
         return "redirect:/books";
     }

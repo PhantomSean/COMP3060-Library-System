@@ -34,8 +34,8 @@ public interface BookRepository extends JpaRepository<Book, Long> {
     int newReservee(long uid, long bid);
     @Transactional
     @Modifying
-    @Query("update Book b set b.userid = ?1, b.available = false where b.id = ?2")
-    int loanToMember(long loaneeID, long bid);
+    @Query("update Book b set b.userid = ?1, b.duedate = ?3, b.available = false where b.id = ?2")
+    int loanToMember(long loaneeID, long bid, Date dueDate);
     @Transactional
     @Modifying
     @Query("update Book b set b.reservedid = ?1, b.reserved = true, b.available = false where b.id = ?2")
