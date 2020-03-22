@@ -2,6 +2,7 @@ package ie.mcwebdeveloper.project.controller;
 
 import ie.mcwebdeveloper.project.UserSession;
 import ie.mcwebdeveloper.project.models.Book;
+import ie.mcwebdeveloper.project.models.LoanHistory;
 import ie.mcwebdeveloper.project.models.User;
 import ie.mcwebdeveloper.project.repositories.BookRepository;
 import ie.mcwebdeveloper.project.repositories.LoanHistoryRepository;
@@ -83,7 +84,12 @@ public class LibraryController {
     @PostMapping("/admin/mark-book-as-returned/{id}")
     public String returnBook(@PathVariable String id, Model model) {
         long i = Long.parseLong(id);
-        bookRepository.returnBook(i);
+        Long ID = null;
+        Date date = null;
+        Book b = bookRepository.findById(i).get();
+        bookRepository.returnBook(i, date, ID);
+        LoanHistory lh = new LoanHistory(i, b.getUserid());
+        loanHistoryRepository.save(lh);
         model.addAttribute("user", userSession.getUser());
         return "redirect:/books";
     }
@@ -215,6 +221,7 @@ public class LibraryController {
             return "editmember.html";
         }
     }
+
 
     @GetMapping("/admin/manage/view-members/{id}/edit")
     public String editMemberProfile(@PathVariable String id, Model model){
