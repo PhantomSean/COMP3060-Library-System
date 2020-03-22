@@ -191,6 +191,38 @@ public class LibraryController {
         }
     }
 
+    @GetMapping("/admin/manage/view-members/{id}/edit")
+public String editMemberProfile(@PathVariable String id, Model model){
+    if(userSession.getUser() == null) {
+        return "redirect:/login";
+    } else {
+        model.addAttribute("title", "LMS - Member Profile");
+        Long i = Long.parseLong(id);
+        User member = userRepository.findById(i).get();
+        model.addAttribute("member", member);
+        model.addAttribute("user", userSession.getUser());
+        return "profile.html";
+    }
+}
+
+@PostMapping("/admin/manage/view-members/{id}/edit")
+public String editProfile(User theUser, @PathVariable String id, Model model) {
+    Long i = Long.parseLong(id);
+    User member = userRepository.findById(i).get();
+    boolean usernameTaken = false;
+    if(userRepository.existsByUsername(theUser.getUsername()))
+        usernameTaken = true;
+    if(!usernameTaken) {
+        userRepository.updateUser(theUser.getUsername(), theUser.getFirstname(), theUser.getLastname(), theUser.getEmail(), theUser.getPassword(), member.getId());
+        model.addAttribute("success", true);
+        return "redirect:/admin/manage/view-members";
+    } else {
+        model.addAttribute("success", false);
+        model.addAttribute("user", userSession.getUser());
+        return "redirect:/admin/manage/view-members";
+    }
+}
+
     @GetMapping("/admin/manage/view-members/{id}/delete")
     public String deleteMembers(@PathVariable String id, Model model) {
         if(userSession.getUser() == null) {

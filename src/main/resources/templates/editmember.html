@@ -24,6 +24,9 @@
             </div>
             <div th:unless="${member == null}">
                 <tr>
+                    <td><a th:href="@{|/admin/manage/view-members/${member.id}/edit|}"><button class="btn btn-primary">Edit Profile</button></a></td>
+                </tr>
+                <tr>
                     <td><a th:href="@{|/admin/manage/view-members/${member.id}/delete|}"><button class="btn btn-primary">Delete Member</button></a></td>
                 </tr>
                 <tr>
