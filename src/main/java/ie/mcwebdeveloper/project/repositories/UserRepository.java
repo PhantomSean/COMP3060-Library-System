@@ -20,6 +20,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Query("update User u set u.username = ?1, u.firstname = ?2, u.lastname = ?3, u.email = ?4, u.password = ?5 where u.id = ?6")
     int updateUser(String username, String firstname, String lastname, String email, String password, long id);
     List<User> findByUsernameLike(String username);
+    @Query("select u from User u where lower(u.username) like lower(concat('%', ?1,'%')) or lower(u.firstname) like lower(concat('%', ?1,'%')) or lower(u.lastname) like lower(concat('%', ?1,'%'))")
+    List<User> findAllByUsernameOrFirstnameOrLastnameLike(String search);
     @Transactional
 	void deleteById(Long i);
 }

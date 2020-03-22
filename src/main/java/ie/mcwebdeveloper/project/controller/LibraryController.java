@@ -164,6 +164,19 @@ public class LibraryController {
         }
     }
 
+    @GetMapping("/admin/manage/view-members/search")
+    public String searchMembers(@RequestParam (value = "search", required = false) String search, Model model) {
+        if(userSession.getUser() == null) {
+            return "redirect:/login";
+        } else {
+            model.addAttribute("title", "LMS - Search Results of Members");
+            List<User> users = userRepository.findAllByUsernameOrFirstnameOrLastnameLike(search);
+            model.addAttribute("users", users);
+            model.addAttribute("user", userSession.getUser());
+            return "viewmembers.html";
+        }
+    }
+
     @GetMapping("admin/manage/view-books")
     public String viewBooks(Model model) {
         if(userSession.getUser() == null) {
