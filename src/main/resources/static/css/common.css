@@ -38,6 +38,11 @@ a:link {
 .card-img-top {
     height: 200px;
 }
+.btn-beside-text {
+    position: relative;
+    left: 3px;
+    bottom: 1px;
+}
 #index-hr {
     border-color: white;
 }

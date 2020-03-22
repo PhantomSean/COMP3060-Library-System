@@ -27,7 +27,10 @@
             </table>
         </div>
         <div class="col-md-6">
-            <h2 class="display-4 mb-3 align-center">Current Loans</h2>
+            <div class="d-flex">
+                <h2 class="display-4 mb-3 align-center">Current Loans</h2>
+                <a th:href="@{|user/profile/${user.id|}" class="float-right">Back</a>
+            </div>
             <table class="table">
                 <thead>
                     <th>Title</th>
@@ -58,6 +61,7 @@
             </table>
         </div>
     </div>
+    <a th:href="@{|user/profile/${user.id}|}">Back</a>
 </div>
 
 <div th:replace="fragments/footer.html"></div>
