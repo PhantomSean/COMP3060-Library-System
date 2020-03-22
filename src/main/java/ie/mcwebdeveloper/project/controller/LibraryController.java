@@ -180,17 +180,26 @@ public class LibraryController {
         }
     }
 
-    @GetMapping("admin/manage/view-books")
+//    @GetMapping("admin/manage/view-books")
+//    public String viewBooks(Model model) {
+//        if(userSession.getUser() == null) {
+//            return "redirect:/login";
+//        } else {
+//            model.addAttribute("title", "LMS - View Books");
+//            List<Book> books = bookRepository.findAll();
+//            model.addAttribute("books", books);
+//            model.addAttribute("user", userSession.getUser());
+//            return "viewbooks.html";
+//        }
+//    }
+
+    @GetMapping("view-books")
     public String viewBooks(Model model) {
-        if(userSession.getUser() == null) {
-            return "redirect:/login";
-        } else {
-            model.addAttribute("title", "LMS - View Books");
-            List<Book> books = bookRepository.findAll();
-            model.addAttribute("books", books);
-            model.addAttribute("user", userSession.getUser());
-            return "viewbooks.html";
-        }
+        model.addAttribute("title", "LMS - View Books");
+        List<Book> books = bookRepository.findAll();
+        model.addAttribute("books", books);
+        model.addAttribute("user", userSession.getUser());
+        return "viewbooks.html";
     }
 
     @GetMapping("admin/manage/view-members/{id}")
@@ -208,18 +217,18 @@ public class LibraryController {
     }
 
     @GetMapping("/admin/manage/view-members/{id}/edit")
-public String editMemberProfile(@PathVariable String id, Model model){
-    if(userSession.getUser() == null) {
-        return "redirect:/login";
-    } else {
-        model.addAttribute("title", "LMS - Member Profile");
-        Long i = Long.parseLong(id);
-        User member = userRepository.findById(i).get();
-        model.addAttribute("member", member);
-        model.addAttribute("user", userSession.getUser());
-        return "profile.html";
+    public String editMemberProfile(@PathVariable String id, Model model){
+        if(userSession.getUser() == null) {
+            return "redirect:/login";
+        } else {
+            model.addAttribute("title", "LMS - Member Profile");
+            Long i = Long.parseLong(id);
+            User member = userRepository.findById(i).get();
+            model.addAttribute("member", member);
+            model.addAttribute("user", userSession.getUser());
+            return "profile.html";
+        }
     }
-}
 
 @PostMapping("/admin/manage/view-members/{id}/edit")
 public String editProfile(User theUser, @PathVariable String id, Model model) {
@@ -381,6 +390,21 @@ public String editProfile(User theUser, @PathVariable String id, Model model) {
             model.addAttribute("user", userSession.getUser());
 //          model.addAttribute("message", "Reserved book successfully.");
             return "redirect:/books";
+        }
+    }
+
+    @GetMapping("/admin/manage/edit-book/{id}")
+    public String editBook(@PathVariable String id, Model model) {
+        if(userSession.getUser() == null) {
+            return "redirect:/login";
+        } else {
+            long i = Long.parseLong(id);
+            Optional<Book> book = bookRepository.findById(i);
+            Book b = book.get();
+            model.addAttribute("user", userSession.getUser());
+            model.addAttribute("book", b);
+//          model.addAttribute("message", "Reserved book successfully.");
+            return "editbook.html";
         }
     }
 
