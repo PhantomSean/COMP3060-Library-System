@@ -124,6 +124,7 @@ public class LibraryController {
         if(!usernameTaken && !emailTaken) {
             userRepository.updateUser(theUser.getUsername(), theUser.getFirstname(), theUser.getLastname(), theUser.getEmail(), theUser.getPassword(), currUser.getId());
             model.addAttribute("success", true);
+            model.addAttribute("user", userSession.getUser());
             return "redirect:/user/profile/" + currUser.getId();
         } else {
             model.addAttribute("success", false);

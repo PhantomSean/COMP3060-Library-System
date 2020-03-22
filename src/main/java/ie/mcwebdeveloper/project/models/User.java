@@ -14,9 +14,17 @@ public class User {
     private String lastname;
     private String email;
     private String password;
-    private boolean librarian;
+    private boolean librarian = false;
 
     protected User () {}
+
+    public User(String username, String firstname, String lastname, String email, String password) {
+        this.username = username;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.email = email;
+        this.password = password;
+    }
 
     public User(String username, String firstname, String lastname, String email, String password, boolean librarian) {
         this.username = username;
